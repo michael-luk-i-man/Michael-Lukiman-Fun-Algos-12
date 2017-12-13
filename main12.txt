@@ -1,0 +1,48 @@
+1. undirected graph G = (V, E). Associated independent value r(u,v) in R, from 0 to 1, the probability that the channel will not fail. 
+
+
+Find the most efficient algo to return the most reliable path between two vertices s and t. What is its running time?
+
+reliable_path(G, w, s):
+	initialize_single_source(G,s)
+
+
+dijkstra(G, w, s):
+	initialize_single_source(G,s)
+	S = []
+	Q = G.v
+	while Q != []:
+		u = extract_max(Q)
+		S.append(u)
+		for v in G.adj[u]
+			relax(u,v,w)
+
+
+initialize_single_source(G,s):
+	for v in G.v:
+		v.d = inf
+		v.pi = NIL
+	distance[s] = 0
+
+relax(u,v,w)
+	if distance[v] > distance[u] + w(u,v):
+		distance[v] = distance[u[ + w(u,v)
+		v.pi = u
+
+max(a1 to ak) = min(a1 to ak)
+
+2. Tucker is in node s, going to party at node h, to meet his Sharona. 
+He needs to get beverages at any restaurants B, which are a part of V. Minimize the distance. 
+
+a) 
+
+b) 
+
+c)
+
+d) 
+
+e)
+
+3. G = (V,E) directed, any real weights. 
+

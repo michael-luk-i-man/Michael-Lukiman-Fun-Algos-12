@@ -1,0 +1,49 @@
+1. Solved. Two breakpoints and a jump. 
+2. Not sure if it is a property of the program or the terminal, but over 1024 characters results in truncation and a new command with leftover characters. Also, the code is validated for numbers only. Maybe this can be jumped over, or some other way using gdb...
+
+...
+
+Indeed, if we set a breakpoint at 0x080484a5 (which is right before the alert 'This number should contain numbers only!!!', we can see $eax = 0 - according to most sources, eax commonly indicates a return value of a function. Then, if in gdb we "set $eax=1", the validation for number-only input seems to be bypassed. 
+
+...
+
+So, inputs with '%'s and alpha-characters can now be accepted with the approach above. To get over the apparent 1024 character terminal/shell limit, we can use print functions when asked for input. 
+
+> ./checkIDcode.exe $(python -c 'print "7"*1025')
+
+
+...
+
+That doesn't really work, since parameter passing through the terminal seems to be ineffective (the program asks for input in a separate function, it seems.)
+
+But just with the knowledge that the number-only rule can be bypassed, we can claim that the program is more susceptible to format string attacks. Buffer overflow attacks, however, we cannot claim work, since we cannot provide a counterexample in this provided shell that create any segmentation faults. 
+
+3. 
+
+3.1 Format strings to gain the key - I can use the %s command, perhaps. 
+
+key0982341
+
+3.2 Memory is easier, just find it. 
+
+ 8048438:	c7 45 8e 6b 65 79 30 	movl   $0x3079656b,-0x72(%ebp)
+ 804843f:	c7 45 92 39 38 32 33 	movl   $0x33323839,-0x6e(%ebp)
+ 8048446:	66 c7 45 96 34 31    	movw   $0x3134,-0x6a(%ebp)
+
+ 6b 65 79 30 
+ 92 39 38 32 33
+ 96 34 31
+
+6b 65 79 30 39 38 32 33 34 31
+
+key0982341
+
+
+3.3 %x write? 
+
+4. 
+
+TBA
+
+5. 
+
