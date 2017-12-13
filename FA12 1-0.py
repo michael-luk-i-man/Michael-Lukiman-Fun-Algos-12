@@ -1,7 +1,14 @@
 # We want to maximize the product, recalling that the sum of logs is equal to the log of the two terms multiplied. 
 
+
+# Consider a graph with nodes A B C D.
+# And reliabilities between AB 0.5 AC 0.4 BD 0.3 CD 0.5
+# The right path is AC CD. 
+
+
 for weight in w:
-	weight = log(1/weight)
+	weight = 1/log(weight)
+
 
 
 
